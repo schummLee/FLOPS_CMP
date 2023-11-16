@@ -7,26 +7,32 @@
 #define ROWS_B 2
 #define COLS_B 3
 
-void matrix_multiply(int A[][COLS_A], int B[][COLS_B], int C[][COLS_B]) {
+void matrix_multiply(int A[][COLS_A], int B[][COLS_B], int C[][COLS_B]) 
+{
     int i, j, k;
 
-    for (i = 0; i < ROWS_A; i++) {
-        for (j = 0; j < COLS_B; j++) {
+    for (i = 0; i < ROWS_A; i++) 
+    {
+        for (j = 0; j < COLS_B; j++) 
+        {
             C[i][j] = 0;
-            for (k = 0; k < COLS_A; k++) {
+            for (k = 0; k < COLS_A; k++) 
+            {
                 C[i][j] += A[i][k] * B[k][j];
             }
         }
     }
 }
 
-double measure_flops(int num_iterations) {
+double measure_flops(int num_iterations) 
+{
     double a = 2.0, b = 3.0, c;
     clock_t start_time, end_time;
 
     start_time = clock();
 
-    for (int i = 0; i < num_iterations; i++) {
+    for (int i = 0; i < num_iterations; i++) 
+    {
         asm volatile("fld %1; fld %2; fmulp" : "=t" (c) : "m" (a), "m" (b));
     }
 
@@ -39,10 +45,13 @@ double measure_flops(int num_iterations) {
     return flops;
 }
 
-void display_matrix(int matrix[][COLS_B], int rows, int cols) {
+void display_matrix(int matrix[][COLS_B], int rows, int cols) 
+{
     int i, j;
-    for (i = 0; i < rows; i++) {
-        for (j = 0; j < cols; j++) {
+    for (i = 0; i < rows; i++) 
+    {
+        for (j = 0; j < cols; j++) 
+        {
             printf("%d ", matrix[i][j]);
         }
         printf("\n");
